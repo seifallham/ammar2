@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - عمار موبايل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+            
+            /* ألوان الوضع الفاتح */
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --card-bg: white;
+            --header-bg: white;
+            --nav-bg: var(--secondary);
+            --border-color: #ddd;
+            --shadow: rgba(0,0,0,0.1);
+        }
+        
+        /* متغيرات الوضع الداكن */
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --header-bg: #1e1e1e;
+            --nav-bg: #0d0d0d;
+            --border-color: #333;
+            --shadow: rgba(0,0,0,0.3);
+            --light: #2a2a2a;
+            --gray: #777;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: var(--header-bg);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .user-actions a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* زر تبديل الوضع */
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .theme-toggle:hover {
+            background-color: var(--light);
+        }
+        
+        nav {
+            background-color: var(--nav-bg);
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* زر القائمة للموبايل */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* قسم المصادقة */
+        .auth-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 0;
+            background-color: var(--light);
+        }
+        
+        .auth-container {
+            display: flex;
+            max-width: 1000px;
+            width: 100%;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px var(--shadow);
+            min-height: 600px;
+        }
+        
+        .auth-image {
+            flex: 1;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            color: white;
+        }
+        
+        .auth-image h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .auth-image p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+        
+        .auth-image ul {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .auth-image li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .auth-image li i {
+            margin-left: 10px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        .auth-form-container {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .auth-tab {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--gray);
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        .auth-tab.active {
+            color: var(--primary);
+        }
+        
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            right: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+        
+        .form-subtitle {
+            color: var(--gray);
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .form-input.error {
+            border-color: var(--accent);
+        }
+        
+        .form-error {
+            color: var(--accent);
+            font-size: 0.85rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .remember-me input {
+            margin: 0;
+        }
+        
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-google {
+            background-color: white;
+            color: #333;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn-google:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .divider {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            color: var(--gray);
+        }
+        
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 45%;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+        
+        .divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 45%;
+            height: 1px;
+            background-color: var(--border-color);
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--gray);
+        }
+        
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--nav-bg);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* التجاوبية */
+        @media (max-width: 1200px) {
+            .container {
+                width: 95%;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .auth-container {
+                flex-direction: column;
+                max-width: 600px;
+            }
+            
+            .auth-image {
+                padding: 30px;
+            }
+            
+            .auth-image h2 {
+                font-size: 1.8rem;
+            }
+            
+            .auth-image p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .user-actions {
+                order: 2;
+            }
+            
+            .search-bar {
+                width: 100%;
+                order: 3;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .menu-toggle {
+                display: block;
+                order: 0;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .auth-form-container {
+                padding: 30px;
+            }
+            
+            .auth-image {
+                padding: 25px;
+            }
+            
+            .user-actions a span {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .auth-container {
+                border-radius: 0;
+                box-shadow: none;
+                min-height: auto;
+            }
+            
+            .auth-form-container {
+                padding: 25px 20px;
+            }
+            
+            .auth-tabs {
+                justify-content: center;
+            }
+            
+            .auth-tab {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .form-title {
+                font-size: 1.5rem;
+            }
+            
+            .form-options {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .auth-image {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .logo h1 {
+                font-size: 1.4rem;
+            }
+            
+            .user-actions {
+                gap: 10px;
+            }
+            
+            .auth-form-container {
+                padding: 20px 15px;
+            }
+            
+            .auth-tab {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="logo">
+                    <img id="RR" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXpjYx0uM617EfReX5Ee7ndDETaUnJunbCqA&s" alt="شعار عمار موبايل">
+                    <h1>عمار موبايل</h1>
+                </div>
+                
+                <div class="user-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="index.html"><i class="fas fa-home"></i> <span>الرئيسية</span></a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> <span>السلة</span></a>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث عن المنتج الذي تريده...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="mainNav">
+            <div class="container">
+                <ul>
+                    <li><a href="/index.html">الرئيسية</a></li>
+                    <li><a href="phones.html">الهواتف</a></li>
+                    <li><a href="laptops.html">اللابتوبات</a></li>
+                    <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                    <li><a href="accessories.html">الإكسسوارات</a></li>
+                    <li><a href="offers.html">العروض</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم المصادقة -->
+    <section class="auth-section">
+        <div class="container">
+            <div class="auth-container">
+                <div class="auth-image">
+                    <h2>انضم إلى مجتمع متجر عمار موبايل</h2>
+                    <p>استمتع بتجربة تسوق فريدة مع أحدث العروض والمميزات الحصرية لأعضائنا</p>
+                    <ul>
+                        <li><i class="fas fa-check-circle"></i> متابعة طلباتك بسهولة</li>
+                        <li><i class="fas fa-check-circle"></i> حفظ المنتجات المفضلة</li>
+                        <li><i class="fas fa-check-circle"></i> عروض حصرية للأعضاء</li>
+                        <li><i class="fas fa-check-circle"></i> توصيل أسرع للمشترين المسجلين</li>
+                        <li><i class="fas fa-check-circle"></i> تاريخ طلباتك محفوظ</li>
+                    </ul>
+                    <p>انضم إلى أكثر من 100,000 عميل راضٍ عن خدماتنا</p>
+                </div>
+                
+                <div class="auth-form-container">
+                    <div class="auth-tabs">
+                        <button class="auth-tab active" data-tab="login">تسجيل الدخول</button>
+                        <button class="auth-tab" data-tab="register">إنشاء حساب</button>
+                    </div>
+                    
+                    <!-- نموذج تسجيل الدخول -->
+                    <form class="auth-form active" id="loginForm">
+                        <h2 class="form-title">مرحباً بعودتك!</h2>
+                        <p class="form-subtitle">سجل الدخول إلى حسابك للمتابعة</p>
+                        
+                        <div class="form-group">
+                            <label for="loginEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" id="loginEmail" class="form-input" placeholder="أدخل بريدك الإلكتروني" required>
+                            <div class="form-error" id="loginEmailError">يرجى إدخال بريد إلكتروني صحيح</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="loginPassword" class="form-label">كلمة المرور</label>
+                            <input type="password" id="loginPassword" class="form-input" placeholder="أدخل كلمة المرور" required>
+                            <div class="form-error" id="loginPasswordError">كلمة المرور يجب أن تحتوي على 6 أحرف على الأقل</div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="rememberMe">
+                                <label for="rememberMe">تذكرني</label>
+                            </div>
+                            <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                        </div>
+                        
+                        <button type="submit" class="btn">تسجيل الدخول</button>
+                        
+                        <div class="divider">أو</div>
+                        
+                        <button type="button" class="btn btn-google">
+                            <i class="fab fa-google"></i> تسجيل الدخول باستخدام Google
+                        </button>
+                        
+                        <div class="auth-footer">
+                            ليس لديك حساب؟ <a href="#" id="switchToRegister">أنشئ حساب جديد</a>
+                        </div>
+                    </form>
+                    
+                    <!-- نموذج إنشاء حساب -->
+                    <form class="auth-form" id="registerForm">
+                        <h2 class="form-title">أنشئ حساب جديد</h2>
+                        <p class="form-subtitle">املأ المعلومات أدناه لإنشاء حسابك</p>
+                        
+                        <div class="form-group">
+                            <label for="registerName" class="form-label">الاسم الكامل</label>
+                            <input type="text" id="registerName" class="form-input" placeholder="أدخل اسمك الكامل" required>
+                            <div class="form-error" id="registerNameError">يرجى إدخال اسم صحيح</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerEmail" class="form-label">البريد الإلكتروني</label>
+                            <input type="email" id="registerEmail" class="form-input" placeholder="أدخل بريدك الإلكتروني" required>
+                            <div class="form-error" id="registerEmailError">يرجى إدخال بريد إلكتروني صحيح</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPhone" class="form-label">رقم الهاتف</label>
+                            <input type="tel" id="registerPhone" class="form-input" placeholder="أدخل رقم هاتفك" required>
+                            <div class="form-error" id="registerPhoneError">يرجى إدخال رقم هاتف صحيح</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerPassword" class="form-label">كلمة المرور</label>
+                            <input type="password" id="registerPassword" class="form-input" placeholder="أنشئ كلمة مرور قوية" required>
+                            <div class="form-error" id="registerPasswordError">كلمة المرور يجب أن تحتوي على 8 أحرف على الأقل وتشمل حروف وأرقام</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="registerConfirmPassword" class="form-label">تأكيد كلمة المرور</label>
+                            <input type="password" id="registerConfirmPassword" class="form-input" placeholder="أعد إدخال كلمة المرور" required>
+                            <div class="form-error" id="registerConfirmPasswordError">كلمتا المرور غير متطابقتين</div>
+                        </div>
+                        
+                        <div class="form-options">
+                            <div class="remember-me">
+                                <input type="checkbox" id="agreeTerms" required>
+                                <label for="agreeTerms">أوافق على <a href="#">شروط الاستخدام</a> و <a href="#">سياسة الخصوصية</a></label>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn">إنشاء الحساب</button>
+                        
+                        <div class="divider">أو</div>
+                        
+                        <button type="button" class="btn btn-google">
+                            <i class="fab fa-google"></i> إنشاء حساب باستخدام Google
+                        </button>
+                        
+                        <div class="auth-footer">
+                            لديك حساب بالفعل؟ <a href="#" id="switchToLogin">سجل الدخول</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن المتجر</h3>
+                    <p>متجر عمار موبايل يوفر أحدث الأجهزة الإلكترونية من هواتف، لابتوبات، أجهزة كمبيوتر وإكسسوارات بجودة عالية وأسعار منافسة.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                        <li><a href="offers.html">العروض</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li><a href="phones.html">الهواتف</a></li>
+                        <li><a href="laptops.html">اللابتوبات</a></li>
+                        <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="covers.html">الكفرات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> الاردن</li>
+                        <li><i class="fas fa-phone"></i> +966 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@technostore.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2025 متجر عمار موبايل</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // زر القائمة للموبايل
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // نظام الوضع الداكن
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // التحقق من التفضيل المحفوظ
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            
+            if (savedTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+            
+            // تبديل الوضع
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                if (newTheme === 'dark') {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            });
+            
+            // إغلاق القائمة عند النقر خارجها
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('nav') && !event.target.closest('.menu-toggle')) {
+                    mainNav.classList.remove('active');
+                }
+            });
+            
+            // تبديل بين نماذج تسجيل الدخول وإنشاء الحساب
+            const authTabs = document.querySelectorAll('.auth-tab');
+            const authForms = document.querySelectorAll('.auth-form');
+            const switchToRegister = document.getElementById('switchToRegister');
+            const switchToLogin = document.getElementById('switchToLogin');
+            
+            function switchTab(tabName) {
+                // تحديث التبويبات النشطة
+                authTabs.forEach(tab => {
+                    if (tab.dataset.tab === tabName) {
+                        tab.classList.add('active');
+                    } else {
+                        tab.classList.remove('active');
+                    }
+                });
+                
+                // تحديث النماذج النشطة
+                authForms.forEach(form => {
+                    if (form.id === `${tabName}Form`) {
+                        form.classList.add('active');
+                    } else {
+                        form.classList.remove('active');
+                    }
+                });
+            }
+            
+            // إضافة مستمعي الأحداث للتبويبات
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    switchTab(this.dataset.tab);
+                });
+            });
+            
+            // إضافة مستمعي الأحداث للروابط
+            switchToRegister.addEventListener('click', function(e) {
+                e.preventDefault();
+                switchTab('register');
+            });
+            
+            switchToLogin.addEventListener('click', function(e) {
+                e.preventDefault();
+                switchTab('login');
+            });
+            
+            // التحقق من صحة النماذج
+            const loginForm = document.getElementById('loginForm');
+            const registerForm = document.getElementById('registerForm');
+            
+            // التحقق من نموذج تسجيل الدخول
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // التحقق من البريد الإلكتروني
+                const email = document.getElementById('loginEmail');
+                const emailError = document.getElementById('loginEmailError');
+                if (!validateEmail(email.value)) {
+                    email.classList.add('error');
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    email.classList.remove('error');
+                    emailError.style.display = 'none';
+                }
+                
+                // التحقق من كلمة المرور
+                const password = document.getElementById('loginPassword');
+                const passwordError = document.getElementById('loginPasswordError');
+                if (password.value.length < 6) {
+                    password.classList.add('error');
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    password.classList.remove('error');
+                    passwordError.style.display = 'none';
+                }
+                
+                if (isValid) {
+                    // محاكاة عملية تسجيل الدخول
+                    alert('تم تسجيل الدخول بنجاح! سيتم توجيهك إلى الصفحة الرئيسية.');
+                    // في التطبيق الحقيقي، هنا سيتم إرسال البيانات إلى الخادم
+                    // window.location.href = 'index.html';
+                }
+            });
+            
+            // التحقق من نموذج إنشاء الحساب
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                let isValid = true;
+                
+                // التحقق من الاسم
+                const name = document.getElementById('registerName');
+                const nameError = document.getElementById('registerNameError');
+                if (name.value.trim().length < 2) {
+                    name.classList.add('error');
+                    nameError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    name.classList.remove('error');
+                    nameError.style.display = 'none';
+                }
+                
+                // التحقق من البريد الإلكتروني
+                const email = document.getElementById('registerEmail');
+                const emailError = document.getElementById('registerEmailError');
+                if (!validateEmail(email.value)) {
+                    email.classList.add('error');
+                    emailError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    email.classList.remove('error');
+                    emailError.style.display = 'none';
+                }
+                
+                // التحقق من رقم الهاتف
+                const phone = document.getElementById('registerPhone');
+                const phoneError = document.getElementById('registerPhoneError');
+                if (!validatePhone(phone.value)) {
+                    phone.classList.add('error');
+                    phoneError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    phone.classList.remove('error');
+                    phoneError.style.display = 'none';
+                }
+                
+                // التحقق من كلمة المرور
+                const password = document.getElementById('registerPassword');
+                const passwordError = document.getElementById('registerPasswordError');
+                if (password.value.length < 8 || !validatePassword(password.value)) {
+                    password.classList.add('error');
+                    passwordError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    password.classList.remove('error');
+                    passwordError.style.display = 'none';
+                }
+                
+                // التحقق من تأكيد كلمة المرور
+                const confirmPassword = document.getElementById('registerConfirmPassword');
+                const confirmPasswordError = document.getElementById('registerConfirmPasswordError');
+                if (password.value !== confirmPassword.value) {
+                    confirmPassword.classList.add('error');
+                    confirmPasswordError.style.display = 'block';
+                    isValid = false;
+                } else {
+                    confirmPassword.classList.remove('error');
+                    confirmPasswordError.style.display = 'none';
+                }
+                
+                // التحقق من الموافقة على الشروط
+                const agreeTerms = document.getElementById('agreeTerms');
+                if (!agreeTerms.checked) {
+                    alert('يجب الموافقة على شروط الاستخدام وسياسة الخصوصية');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    // محاكاة عملية إنشاء الحساب
+                    alert('تم إنشاء الحساب بنجاح! تم إرسال رسالة تأكيد إلى بريدك الإلكتروني.');
+                    // في التطبيق الحقيقي، هنا سيتم إرسال البيانات إلى الخادم
+                    // switchTab('login');
+                }
+            });
+            
+            // وظائف مساعدة للتحقق من الصحة
+            function validateEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
+            
+            function validatePhone(phone) {
+                const re = /^[\+]?[0-9]{10,15}$/;
+                return re.test(phone.replace(/\s/g, ''));
+            }
+            
+            function validatePassword(password) {
+                // يجب أن تحتوي على حرف كبير، حرف صغير، ورقم
+                const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/;
+                return re.test(password);
+            }
+        });
+    </script>
+</body>
+</html>

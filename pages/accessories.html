@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإكسسوارات - عمار موبايل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] {
+            --light: #2c3e50;
+            --dark: #ecf0f1;
+            --gray: #bdc3c7;
+            --secondary: #34495e;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] header {
+            background-color: var(--secondary);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+
+        [data-theme="dark"] .logo h1 {
+            color: white;
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .search-bar input {
+            background-color: #34495e;
+            border-color: #4a6572;
+            color: white;
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .search-bar button:hover {
+            background: var(--primary-dark);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--dark);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .theme-toggle {
+            color: white;
+        }
+        
+        .user-actions a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .user-actions a {
+            color: white;
+        }
+        
+        .user-actions a:hover {
+            color: var(--primary);
+        }
+        
+        nav {
+            background-color: var(--secondary);
+            padding: 10px 0;
+            transition: var(--transition);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* زر القائمة للموبايل */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        [data-theme="dark"] .menu-toggle {
+            color: white;
+        }
+        
+        /* الهيرو */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* الأقسام */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            position: relative;
+        }
+
+        [data-theme="dark"] .section-title {
+            color: white;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 10px auto;
+        }
+        
+        /* تصنيفات الإكسسوارات */
+        .categories {
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        [data-theme="dark"] .category-card {
+            background-color: #34495e;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover .category-img img {
+            transform: scale(1.05);
+        }
+        
+        .category-info {
+            padding: 15px;
+        }
+        
+        .category-info h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        [data-theme="dark"] .category-info h3 {
+            color: white;
+        }
+        
+        /* تصفية المنتجات */
+        .filters {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .filters {
+            background-color: #34495e;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        [data-theme="dark"] .filter-group h3 {
+            color: white;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-option {
+            background-color: var(--light);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        [data-theme="dark"] .filter-option {
+            background-color: #2c3e50;
+            color: white;
+        }
+        
+        .filter-option:hover, .filter-option.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        [data-theme="dark"] .product-card {
+            background-color: #34495e;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        [data-theme="dark"] .product-info h3 {
+            color: white;
+        }
+        
+        .product-specs {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .product-specs span {
+            background-color: var(--light);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        [data-theme="dark"] .product-specs span {
+            background-color: #2c3e50;
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .old-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+        
+        .product-rating {
+            color: #f1c40f;
+            margin-bottom: 10px;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--primary-dark);
+        }
+        
+        /* قسم العروض */
+        .offers {
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+        
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .offer-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        [data-theme="dark"] .offer-card {
+            background-color: #34495e;
+        }
+        
+        .offer-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .offer-img {
+            height: 200px;
+        }
+        
+        .offer-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .offer-info {
+            padding: 15px;
+        }
+        
+        .offer-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        [data-theme="dark"] .offer-info h3 {
+            color: white;
+        }
+        
+        .offer-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 50px 0 20px;
+            transition: var(--transition);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* تحسينات التجاوبية */
+        
+        /* شاشات متوسطة (أجهزة لوحية) */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .offers-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+        
+        /* شاشات صغيرة (أجهزة لوحية صغيرة وهواتف كبيرة) */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+                padding-top: 60px;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .search-bar {
+                width: 100%;
+                order: 3;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            nav {
+                display: none;
+                padding: 0;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .hero {
+                padding: 50px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        /* شاشات صغيرة جداً (هواتف محمولة) */
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-group h3 {
+                font-size: 1rem;
+            }
+            
+            .product-info h3 {
+                font-size: 1.1rem;
+            }
+            
+            .product-price {
+                font-size: 1.1rem;
+            }
+            
+            .product-specs {
+                font-size: 0.85rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .user-actions {
+                gap: 15px;
+            }
+            
+            .user-actions a {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* شاشات كبيرة جداً (شاشات واسعة) */
+        @media (min-width: 1400px) {
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .offers-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* تحسينات عامة للتجربة على الجوال */
+        @media (max-width: 768px) {
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .add-to-cart {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .filter-option {
+                padding: 10px;
+                text-align: center;
+            }
+            
+            .product-img {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="logo">
+                    <img id="RR" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXpjYx0uM617EfReX5Ee7ndDETaUnJunbCqA&s" alt="شعار عمار موبايل">
+                    <h1>عمار موبايل</h1>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث عن الإكسسوارات التي تريدها...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-actions">
+                    <button class="theme-toggle" id="themeToggle" title="تبديل الوضع">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="login.html"><i class="fas fa-user"></i> حسابي</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> السلة</a>
+                    <a href="favorites.html"><i class="fas fa-heart"></i> المفضلة</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="mainNav">
+            <div class="container">
+                <ul>
+                    <li><a href="/index.html">الرئيسية</a></li>
+                    <li><a href="phones.html">الهواتف</a></li>
+                    <li><a href="laptops.html">اللابتوبات</a></li>
+                    <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                    <li><a href="accessories.html" class="active">الإكسسوارات</a></li>
+                    <li><a href="covers.html">الكفرات</a></li>
+                    <li><a href="offers.html">العروض</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم الهيرو -->
+    <section class="hero">
+        <div class="container">
+            <h2>إكسسوارات عمار موبايللوجية بجودة عالية</h2>
+            <p>اكتشف مجموعتنا الواسعة من الإكسسوارات العمار موبايللوجية المناسبة لهواتفكم، لابتوباتكم وأجهزتكم الأخرى. جودة عالية وأسعار منافسة.</p>
+            <a href="#products" class="btn">استعرض الإكسسوارات</a>
+        </div>
+    </section>
+
+    <!-- قسم التصنيفات -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">أنواع الإكسسوارات</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="cases">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="كفرات الهواتف">
+                    </div>
+                    <div class="category-info">
+                        <h3>كفرات الهواتف</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="chargers">
+                    <div class="category-img">
+                        <img src="data:image/jpeg;base64,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" alt="شواحن وكابلات">
+                    </div>
+                    <div class="category-info">
+                        <h3>شواحن وكابلات</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="headphones">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="سماعات">
+                    </div>
+                    <div class="category-info">
+                        <h3>سماعات</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="powerbanks">
+                    <div class="category-img">
+                        <img src="data:image/jpeg;base64,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" alt="شواحن محمولة">
+                    </div>
+                    <div class="category-info">
+                        <h3>شواحن محمولة</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الإكسسوارات -->
+    <section id="products" class="accessories">
+        <div class="container">
+            <h2 class="section-title">الإكسسوارات المتوفرة</h2>
+            
+            <!-- فلترة المنتجات -->
+            <div class="filters">
+                <div class="filter-group">
+                    <h3>نوع الإكسسوار</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option" data-category="cases">كفرات هواتف</div>
+                        <div class="filter-option" data-category="chargers">شواحن وكابلات</div>
+                        <div class="filter-option" data-category="headphones">سماعات</div>
+                        <div class="filter-option" data-category="powerbanks">شواحن محمولة</div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>السعر</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option">أقل من 50 دينار</div>
+                        <div class="filter-option">50 - 100 دينار</div>
+                        <div class="filter-option">100 - 200 دينار</div>
+                        <div class="filter-option">أكثر من 200 دينار</div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>العلامة التجارية</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option">Spigen</div>
+                        <div class="filter-option">Anker</div>
+                        <div class="filter-option">Samsung</div>
+                        <div class="filter-option">Apple</div>
+                        <div class="filter-option">Baseus</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- شبكة المنتجات -->
+            <div class="products-grid">
+                <!-- منتج 1 -->
+                <div class="product-card" data-category="cases">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="كفر هاتف">
+                        <div class="product-badge">الأكثر مبيعاً</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>كفر Spigen لآيفون 14</h3>
+                        <div class="product-specs">
+                            <span>مقاوم للصدمات</span>
+                            <span>حماية زوايا مزدوجة</span>
+                        </div>
+                        <div class="product-price">89 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 2 -->
+                <div class="product-card" data-category="chargers">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="شاحن لاسلكي">
+                        <div class="product-badge">عرض خاص</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>شاحن لاسلكي Anker</h3>
+                        <div class="product-specs">
+                            <span>شحن سريع 15 واط</span>
+                            <span>تبريد نشط</span>
+                        </div>
+                        <div class="product-price">129 دينار <span class="old-price">159 دينار</span></div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 3 -->
+                <div class="product-card" data-category="headphones">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="سماعات لاسلكية">
+                    </div>
+                    <div class="product-info">
+                        <h3>سماعات Samsung Buds2</h3>
+                        <div class="product-specs">
+                            <span>عزل ضوضاء نشط</span>
+                            <span>بطارية 20 ساعة</span>
+                        </div>
+                        <div class="product-price">349 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 4 -->
+                <div class="product-card" data-category="powerbanks">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="شاحن محمول">
+                    </div>
+                    <div class="product-info">
+                        <h3>شاحن محمول Anker 10000mAh</h3>
+                        <div class="product-specs">
+                            <span>شحن سريع</span>
+                            <span>منفذ USB-C</span>
+                        </div>
+                        <div class="product-price">149 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 5 -->
+                <div class="product-card" data-category="cases">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="حامل هاتف للسيارة">
+                        <div class="product-badge">جديد</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>حامل هاتف مغناطيسي للسيارة</h3>
+                        <div class="product-specs">
+                            <span>مغناطيسي قوي</span>
+                            <span>شحن لاسلكي</span>
+                        </div>
+                        <div class="product-price">79 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 6 -->
+                <div class="product-card" data-category="chargers">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="حامي شاشة">
+                    </div>
+                    <div class="product-info">
+                        <h3>حامي شاشة زجاجي مقوى</h3>
+                        <div class="product-specs">
+                            <span>صلابة 9H</span>
+                            <span>حماية كاملة</span>
+                        </div>
+                        <div class="product-price">45 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 7 -->
+                <div class="product-card" data-category="chargers">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="كابل شحن">
+                    </div>
+                    <div class="product-info">
+                        <h3>كابل شحن سريع USB-C</h3>
+                        <div class="product-specs">
+                            <span>100 واط</span>
+                            <span>طول 2 متر</span>
+                        </div>
+                        <div class="product-price">59 دينار <span class="old-price">79 دينار</span></div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 8 -->
+                <div class="product-card" data-category="headphones">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="سماعات رأس">
+                    </div>
+                    <div class="product-info">
+                        <h3>سماعات رأس Sony WH-1000XM4</h3>
+                        <div class="product-specs">
+                            <span>عزل ضوضاء متقدم</span>
+                            <span>بطارية 30 ساعة</span>
+                        </div>
+                        <div class="product-price">1,199 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم العروض -->
+    <section class="offers">
+        <div class="container">
+            <h2 class="section-title">عروض خاصة على الإكسسوارات</h2>
+            <div class="offers-grid">
+                <!-- عرض 1 -->
+                <div class="offer-card">
+                    <div class="offer-badge">خصم 25%</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>خصم على جميع الإكسسوارات</h3>
+                        <p>احصل على خصم 25% على جميع الإكسسوارات لمدة محدودة. شاملة الكفرات، الشواحن، السماعات وغيرها.</p>
+                        <a href="offers.html" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+                
+                <!-- عرض 2 -->
+                <div class="offer-card">
+                    <div class="offer-badge">عرض حصري</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>شراء كفر واحصل على حامي شاشة مجاني</h3>
+                        <p>عند شراء أي كفر هاتف، احصل على حامي شاشة مجاني من نفس الماركة.</p>
+                        <a href="offers.html" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+                
+                <!-- عرض 3 -->
+                <div class="offer-card">
+                    <div class="offer-badge">تخفيضات</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>خصم على السماعات اللاسلكية</h3>
+                        <p>خصم 30% على جميع السماعات اللاسلكية من الماركات العالمية. العرض لفترة محدودة.</p>
+                        <a href="offers.html" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن المتجر</h3>
+                    <p>متجر عمار موبايل يوفر أحدث الأجهزة الإلكترونية من هواتف، لابتوبات، أجهزة كمبيوتر وإكسسوارات بجودة عالية وأسعار منافسة.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="#">العروض</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li><a href="phones.html">الهواتف</a></li>
+                        <li><a href="laptops.html">اللابتوبات</a></li>
+                        <li><a href="#">أجهزة الكمبيوتر</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="#">الكفرات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> الاردن</li>
+                        <li><i class="fas fa-phone"></i> +966 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@technostore.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2025 عمار موبايل</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية بسيطة
+        document.addEventListener('DOMContentLoaded', function() {
+            // زر القائمة للموبايل
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // إغلاق القائمة عند النقر على رابط
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+            
+            // تبديل الوضع الداكن/الفاتح
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // التحقق من الوضع الحالي في التخزين المحلي
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', currentTheme);
+            
+            if (currentTheme === 'dark') {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                
+                if (newTheme === 'dark') {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            });
+            
+            // إضافة تأثير عند التمرير
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                } else {
+                    header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                }
+            });
+            
+            // إضافة تأثير عند الضغط على أزرار إضافة إلى السلة
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.parentElement.querySelector('h3').textContent;
+                    alert(`تم إضافة ${productName} إلى سلة التسوق`);
+                });
+            });
+            
+            // فلترة المنتجات
+            const filterOptions = document.querySelectorAll('.filter-option');
+            filterOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // إزالة النشاط من جميع الخيارات في المجموعة
+                    const parentGroup = this.parentElement;
+                    const groupOptions = parentGroup.querySelectorAll('.filter-option');
+                    groupOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // إضافة النشاط للخيار المحدد
+                    this.classList.add('active');
+                    
+                    // تطبيق الفلترة
+                    filterProducts();
+                });
+            });
+            
+            // فلترة المنتجات حسب التصنيف
+            function filterProducts() {
+                const activeCategory = document.querySelector('.filter-options .filter-option.active')?.dataset.category;
+                const products = document.querySelectorAll('.product-card');
+                
+                products.forEach(product => {
+                    if (!activeCategory || activeCategory === 'الكل' || product.dataset.category === activeCategory) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            }
+            
+            // فلترة المنتجات عند النقر على بطاقات التصنيف
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // تحديث الفلاتر النشطة
+                    const categoryOptions = document.querySelectorAll('.filter-option[data-category]');
+                    categoryOptions.forEach(option => {
+                        option.classList.remove('active');
+                        if (option.dataset.category === category) {
+                            option.classList.add('active');
+                        }
+                    });
+                    
+                    // تطبيق الفلترة
+                    filterProducts();
+                    
+                    // التمرير إلى قسم المنتجات
+                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

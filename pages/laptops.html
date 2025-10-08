@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اللابتوبات - عمار موبايل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            /* ألوان وضع الضوء */
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --card-bg: white;
+            --header-bg: white;
+            --footer-bg: var(--secondary);
+            --footer-text: white;
+            --nav-bg: var(--secondary);
+            --nav-text: white;
+            --shadow: rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        [data-theme="dark"] {
+            /* ألوان وضع الظلام */
+            --primary: #3498db;
+            --secondary: #34495e;
+            --accent: #e74c3c;
+            --light: #2c3e50;
+            --dark: #ecf0f1;
+            --gray: #7f8c8d;
+            --success: #27ae60;
+            --bg-color: #1a1a1a;
+            --text-color: #ecf0f1;
+            --card-bg: #2c3e50;
+            --header-bg: #2c3e50;
+            --footer-bg: #2c3e50;
+            --footer-text: #ecf0f1;
+            --nav-bg: #2c3e50;
+            --nav-text: #ecf0f1;
+            --shadow: rgba(0,0,0,0.3);
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: var(--header-bg);
+            box-shadow: 0 2px 10px var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            position: relative;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 4px 0 0 4px;
+            outline: none;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .user-actions a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        
+        .theme-toggle:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+        
+        nav {
+            background-color: var(--nav-bg);
+            padding: 10px 0;
+            transition: var(--transition);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+        }
+        
+        nav a {
+            color: var(--nav-text);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* زر القائمة للموبايل */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: var(--transition);
+        }
+        
+        /* الهيرو */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* الأقسام */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 10px auto;
+        }
+        
+        /* تصنيفات اللابتوبات */
+        .categories {
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover .category-img img {
+            transform: scale(1.05);
+        }
+        
+        .category-info {
+            padding: 15px;
+        }
+        
+        .category-info h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+        
+        /* تصفية المنتجات */
+        .filters {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-option {
+            background-color: var(--light);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-option:hover, .filter-option.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            perspective: 1000px;
+            height: 450px;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+        
+        .product-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .product-card:hover .product-card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .product-card-front, .product-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card-back {
+            transform: rotateY(180deg);
+            padding: 20px;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--card-bg);
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            padding: 15px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .product-specs {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .product-specs span {
+            background-color: var(--light);
+            padding: 3px 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .old-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+        
+        .product-rating {
+            color: #f1c40f;
+            margin-bottom: 10px;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+            margin-top: auto;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+        
+        /* قسم العروض */
+        .offers {
+            background-color: var(--light);
+            transition: var(--transition);
+        }
+        
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .offer-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            position: relative;
+            transition: var(--transition);
+        }
+        
+        .offer-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .offer-img {
+            height: 200px;
+        }
+        
+        .offer-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .offer-info {
+            padding: 15px;
+        }
+        
+        .offer-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .offer-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 50px 0 20px;
+            transition: var(--transition);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* تحسينات التجاوبية */
+        
+        /* شاشات كبيرة جداً (شاشات واسعة) */
+        @media (min-width: 1400px) {
+            .products-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .offers-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        /* شاشات متوسطة (أجهزة لوحية) */
+        @media (max-width: 1200px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 20px;
+            }
+            
+            .offers-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            }
+        }
+        
+        /* شاشات متوسطة صغيرة (أجهزة لوحية صغيرة) */
+        @media (max-width: 992px) {
+            .header-top {
+                flex-wrap: wrap;
+            }
+            
+            .search-bar {
+                width: 60%;
+                order: 3;
+                margin-top: 15px;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* شاشات صغيرة (أجهزة لوحية صغيرة وهواتف كبيرة) */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: row;
+                gap: 15px;
+                padding-top: 15px;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .search-bar {
+                width: 100%;
+                order: 3;
+                margin-top: 15px;
+            }
+            
+            .user-actions {
+                width: auto;
+                justify-content: flex-start;
+            }
+            
+            nav {
+                display: none;
+                padding: 0;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .hero {
+                padding: 50px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .product-card {
+                height: auto;
+            }
+            
+            .product-card:hover .product-card-inner {
+                transform: none;
+            }
+            
+            .product-card-back {
+                position: relative;
+                transform: none;
+                padding: 15px;
+                height: auto;
+            }
+            
+            .product-card-inner {
+                transform: none;
+                height: auto;
+            }
+            
+            .product-card-front, .product-card-back {
+                position: relative;
+                height: auto;
+            }
+        }
+        
+        /* شاشات صغيرة جداً (هواتف محمولة) */
+        @media (max-width: 576px) {
+            .header-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .logo {
+                margin-bottom: 10px;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .categories-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-group h3 {
+                font-size: 1rem;
+            }
+            
+            .product-info h3 {
+                font-size: 1.1rem;
+            }
+            
+            .product-price {
+                font-size: 1.1rem;
+            }
+            
+            .product-specs {
+                font-size: 0.85rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .user-actions a {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* تحسينات عامة للتجربة على الجوال */
+        @media (max-width: 768px) {
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .add-to-cart {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .filter-option {
+                padding: 10px;
+                text-align: center;
+            }
+            
+            .product-img {
+                height: 180px;
+            }
+            
+            /* تحسينات اللمس */
+            button, .btn, .filter-option, .category-card, .product-card {
+                touch-action: manipulation;
+            }
+            
+            .add-to-cart, .btn {
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+        
+        /* تأثيرات Fade-in */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+        
+        .product-card, .category-card, .offer-card {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <button class="menu-toggle" id="menuToggle" aria-label="فتح/إغلاق القائمة">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="logo">
+                    <img id="RR" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXpjYx0uM617EfReX5Ee7ndDETaUnJunbCqA&s" alt="شعار عمار موبايل">
+                    <h1>عمار موبايل</h1>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث عن اللابتوب الذي تريده...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-actions">
+                    <button class="theme-toggle" id="themeToggle" aria-label="تبديل وضع السطوع">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <a href="login.html"><i class="fas fa-user"></i> حسابي</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> السلة</a>
+                    <a href="favorites.html"><i class="fas fa-heart"></i> المفضلة</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="mainNav">
+            <div class="container">
+                <ul>
+                    <li><a href="/index.html">الرئيسية</a></li>
+                    <li><a href="phones.html">الهواتف</a></li>
+                    <li><a href="laptops.html" class="active">اللابتوبات</a></li>
+                    <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                    <li><a href="accessories.html">الإكسسوارات</a></li>
+                    <li><a href="covers.html">الكفرات</a></li>
+                    <li><a href="offers.html">العروض</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم الهيرو -->
+    <section class="hero">
+        <div class="container">
+            <h2>أفضل اللابتوبات بأفضل الأسعار</h2>
+            <p>اكتشف مجموعتنا الواسعة من اللابتوبات المناسبة للعمل، الدراسة، الألعاب، والتصميم. جودة عالية وأسعار منافسة.</p>
+            <a href="#products" class="btn">استعرض اللابتوبات</a>
+        </div>
+    </section>
+
+    <!-- قسم التصنيفات -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">أنواع اللابتوبات</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="work">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="لابتوبات العمل">
+                    </div>
+                    <div class="category-info">
+                        <h3>لابتوبات العمل</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="gaming">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="لابتوبات الألعاب">
+                    </div>
+                    <div class="category-info">
+                        <h3>لابتوبات الألعاب</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="design">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1168&q=80" alt="لابتوبات التصميم">
+                    </div>
+                    <div class="category-info">
+                        <h3>لابتوبات التصميم</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="student">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="لابتوبات الطلبة">
+                    </div>
+                    <div class="category-info">
+                        <h3>لابتوبات الطلبة</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم اللابتوبات -->
+    <section id="products" class="laptops">
+        <div class="container">
+            <h2 class="section-title">اللابتوبات المتوفرة</h2>
+            
+            <!-- فلترة المنتجات -->
+            <div class="filters">
+                <div class="filter-group">
+                    <h3>الفئة</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option" data-category="work">لابتوبات العمل</div>
+                        <div class="filter-option" data-category="gaming">لابتوبات الألعاب</div>
+                        <div class="filter-option" data-category="design">لابتوبات التصميم</div>
+                        <div class="filter-option" data-category="student">لابتوبات الطلبة</div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>السعر</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option">أقل من 3000 دينار</div>
+                        <div class="filter-option">3000 - 5000 دينار</div>
+                        <div class="filter-option">5000 - 8000 دينار</div>
+                        <div class="filter-option">أكثر من 8000 دينار</div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>العلامة التجارية</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option">Apple</div>
+                        <div class="filter-option">Dell</div>
+                        <div class="filter-option">Lenovo</div>
+                        <div class="filter-option">Asus</div>
+                        <div class="filter-option">HP</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- شبكة المنتجات -->
+            <div class="products-grid">
+                <!-- منتج 1 -->
+                <div class="product-card" data-category="work">
+                    <div class="product-card-inner">
+                        <div class="product-card-front">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="لابتوب">
+                                <div class="product-badge">الأكثر مبيعاً</div>
+                            </div>
+                            <div class="product-info">
+                                <h3>لابتوب ديل XPS 13</h3>
+                                <div class="product-specs">
+                                    <span>شاشة 13 بوصة</span>
+                                    <span>16 جيجا رام</span>
+                                    <span>512 جيجا SSD</span>
+                                </div>
+                                <div class="product-price">5,499 دينار <span class="old-price">6,200 دينار</span></div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <button class="add-to-cart">أضف إلى السلة</button>
+                            </div>
+                        </div>
+                        <div class="product-card-back">
+                            <h3>مميزات إضافية</h3>
+                            <ul style="text-align: right; margin: 15px 0; list-style-type: none;">
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> شاشة لمس عالية الدقة</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> بطارية تدوم حتى 12 ساعة</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> وزن خفيف 1.2 كجم</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> ضمان 3 سنوات</li>
+                            </ul>
+                            <button class="btn" style="margin-top: 15px;">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منتج 2 -->
+                <div class="product-card" data-category="design">
+                    <div class="product-card-inner">
+                        <div class="product-card-front">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1168&q=80" alt="لابتوب">
+                                <div class="product-badge">عرض خاص</div>
+                            </div>
+                            <div class="product-info">
+                                <h3>ماك بوك برو M2</h3>
+                                <div class="product-specs">
+                                    <span>شاشة 14 بوصة</span>
+                                    <span>16 جيجا رام</span>
+                                    <span>1 تيرا SSD</span>
+                                </div>
+                                <div class="product-price">7,999 دينار</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <button class="add-to-cart">أضف إلى السلة</button>
+                            </div>
+                        </div>
+                        <div class="product-card-back">
+                            <h3>مميزات إضافية</h3>
+                            <ul style="text-align: right; margin: 15px 0; list-style-type: none;">
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> شريحة M2 باداء فائق</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> شاشة Retina XDR</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> نظام تشغيل macOS</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> تصميم أنيق ومتين</li>
+                            </ul>
+                            <button class="btn" style="margin-top: 15px;">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منتج 3 -->
+                <div class="product-card" data-category="work">
+                    <div class="product-card-inner">
+                        <div class="product-card-front">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="لابتوب">
+                            </div>
+                            <div class="product-info">
+                                <h3>لينوفو ثينك باد X1</h3>
+                                <div class="product-specs">
+                                    <span>شاشة 14 بوصة</span>
+                                    <span>8 جيجا رام</span>
+                                    <span>256 جيجا SSD</span>
+                                </div>
+                                <div class="product-price">4,299 دينار <span class="old-price">4,800 دينار</span></div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <button class="add-to-cart">أضف إلى السلة</button>
+                            </div>
+                        </div>
+                        <div class="product-card-back">
+                            <h3>مميزات إضافية</h3>
+                            <ul style="text-align: right; margin: 15px 0; list-style-type: none;">
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> لوحة مفاتيح مضاءة</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> مقاوم للماء والغبار</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> قارئ بصمة الأصبع</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> ضمان 3 سنوات</li>
+                            </ul>
+                            <button class="btn" style="margin-top: 15px;">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منتج 4 -->
+                <div class="product-card" data-category="student">
+                    <div class="product-card-inner">
+                        <div class="product-card-front">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1498758536662-35b82cd15e29?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="لابتوب">
+                            </div>
+                            <div class="product-info">
+                                <h3>أسوس زين بوك 14</h3>
+                                <div class="product-specs">
+                                    <span>شاشة 14 بوصة</span>
+                                    <span>16 جيجا رام</span>
+                                    <span>512 جيجا SSD</span>
+                                </div>
+                                <div class="product-price">3,799 دينار</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <button class="add-to-cart">أضف إلى السلة</button>
+                            </div>
+                        </div>
+                        <div class="product-card-back">
+                            <h3>مميزات إضافية</h3>
+                            <ul style="text-align: right; margin: 15px 0; list-style-type: none;">
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> تصميم خفيف الوزن</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> أداء ممتاز للطلبة</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> سعر مناسب للطلبة</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> بطارية تدوم طويلاً</li>
+                            </ul>
+                            <button class="btn" style="margin-top: 15px;">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منتج 5 -->
+                <div class="product-card" data-category="gaming">
+                    <div class="product-card-inner">
+                        <div class="product-card-front">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1603126857599-f6e157fa2fe6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="لابتوب">
+                                <div class="product-badge">جديد</div>
+                            </div>
+                            <div class="product-info">
+                                <h3>لابتوب ألعاب MSI</h3>
+                                <div class="product-specs">
+                                    <span>شاشة 15.6 بوصة</span>
+                                    <span>32 جيجا رام</span>
+                                    <span>1 تيرا SSD</span>
+                                </div>
+                                <div class="product-price">8,499 دينار</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <button class="add-to-cart">أضف إلى السلة</button>
+                            </div>
+                        </div>
+                        <div class="product-card-back">
+                            <h3>مميزات إضافية</h3>
+                            <ul style="text-align: right; margin: 15px 0; list-style-type: none;">
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> كرت شاشة RTX 3070</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> معدل تحديث 144 هرتز</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> لوحة مفاتيح مضاءة RGB</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> نظام تبريد متطور</li>
+                            </ul>
+                            <button class="btn" style="margin-top: 15px;">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منتج 6 -->
+                <div class="product-card" data-category="design">
+                    <div class="product-card-inner">
+                        <div class="product-card-front">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="لابتوب">
+                            </div>
+                            <div class="product-info">
+                                <h3>HP Spectre x360</h3>
+                                <div class="product-specs">
+                                    <span>شاشة 13.5 بوصة</span>
+                                    <span>16 جيجا رام</span>
+                                    <span>512 جيجا SSD</span>
+                                </div>
+                                <div class="product-price">5,899 دينار</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <button class="add-to-cart">أضف إلى السلة</button>
+                            </div>
+                        </div>
+                        <div class="product-card-back">
+                            <h3>مميزات إضافية</h3>
+                            <ul style="text-align: right; margin: 15px 0; list-style-type: none;">
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> شاشة قابلة للطي 360 درجة</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> قلم رقمي مضمن</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> تصميم معدني أنيق</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> مثالي للمصممين</li>
+                            </ul>
+                            <button class="btn" style="margin-top: 15px;">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منتج 7 -->
+                <div class="product-card" data-category="gaming">
+                    <div class="product-card-inner">
+                        <div class="product-card-front">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="لابتوب">
+                            </div>
+                            <div class="product-info">
+                                <h3>لابتوب ألعاب ASUS ROG</h3>
+                                <div class="product-specs">
+                                    <span>شاشة 17 بوصة</span>
+                                    <span>16 جيجا رام</span>
+                                    <span>1 تيرا SSD</span>
+                                </div>
+                                <div class="product-price">7,299 دينار <span class="old-price">8,100 دينار</span></div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <button class="add-to-cart">أضف إلى السلة</button>
+                            </div>
+                        </div>
+                        <div class="product-card-back">
+                            <h3>مميزات إضافية</h3>
+                            <ul style="text-align: right; margin: 15px 0; list-style-type: none;">
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> كرت شاشة RTX 3060</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> معالج Intel i7</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> تصميم عدواني للألعاب</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> نظام صوتي محيطي</li>
+                            </ul>
+                            <button class="btn" style="margin-top: 15px;">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- منتج 8 -->
+                <div class="product-card" data-category="student">
+                    <div class="product-card-inner">
+                        <div class="product-card-front">
+                            <div class="product-img">
+                                <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80" alt="لابتوب">
+                            </div>
+                            <div class="product-info">
+                                <h3>لابتوب طلبة Dell Inspiron</h3>
+                                <div class="product-specs">
+                                    <span>شاشة 15.6 بوصة</span>
+                                    <span>8 جيجا رام</span>
+                                    <span>256 جيجا SSD</span>
+                                </div>
+                                <div class="product-price">2,899 دينار</div>
+                                <div class="product-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <button class="add-to-cart">أضف إلى السلة</button>
+                            </div>
+                        </div>
+                        <div class="product-card-back">
+                            <h3>مميزات إضافية</h3>
+                            <ul style="text-align: right; margin: 15px 0; list-style-type: none;">
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> سعر مناسب للطلبة</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> أداء جيد للمهام الدراسية</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> تصميم متين</li>
+                                <li><i class="fas fa-check" style="color: var(--success); margin-left: 5px;"></i> ضمان 2 سنوات</li>
+                            </ul>
+                            <button class="btn" style="margin-top: 15px;">اطلب الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم العروض -->
+    <section class="offers">
+        <div class="container">
+            <h2 class="section-title">عروض خاصة على اللابتوبات</h2>
+            <div class="offers-grid">
+                <!-- عرض 1 -->
+                <div class="offer-card">
+                    <div class="offer-badge">خصم 20%</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>خصم على جميع اللابتوبات</h3>
+                        <p>احصل على خصم 20% على جميع اللابتوبات لمدة محدودة. العرض يشمل جميع الماركات والمواصفات.</p>
+                        <a href="offers.html" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+                
+                <!-- عرض 2 -->
+                <div class="offer-card">
+                    <div class="offer-badge">عرض حصري</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1168&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>شراء لابتوب واحصل على إكسسوارات مجانية</h3>
+                        <p>عند شراء أي لابتوب، احصل على حقيبة مجانية ولوحة مفاتيح وفأرة مجاناً.</p>
+                        <a href="offers.html" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+                
+                <!-- عرض 3 -->
+                <div class="offer-card">
+                    <div class="offer-badge">تخفيضات</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>خصم على لابتوبات الألعاب</h3>
+                        <p>خصم 25% على جميع لابتوبات الألعاب من الماركات العالمية. العرض لفترة محدودة.</p>
+                        <a href="offers.html" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن المتجر</h3>
+                    <p>متجر عمار موبايل يوفر أحدث الأجهزة الإلكترونية من هواتف، لابتوبات، أجهزة كمبيوتر وإكسسوارات بجودة عالية وأسعار منافسة.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="laptops.html">اللابتوبات</a></li>
+                        <li><a href="#">العروض</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li><a href="phones.html">الهواتف</a></li>
+                        <li><a href="laptops.html">اللابتوبات</a></li>
+                        <li><a href="#">أجهزة الكمبيوتر</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="#">الكفرات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> الاردن</li>
+                        <li><i class="fas fa-phone"></i> +966 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@technostore.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2025 عمار موبايل</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية بسيطة
+        document.addEventListener('DOMContentLoaded', function() {
+            // زر القائمة للموبايل
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // إغلاق القائمة عند النقر على رابط
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+            
+            // إضافة تأثير عند التمرير
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 5px 15px var(--shadow)';
+                } else {
+                    header.style.boxShadow = '0 2px 10px var(--shadow)';
+                }
+            });
+            
+            // إضافة تأثير عند الضغط على أزرار إضافة إلى السلة
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    alert(`تم إضافة ${productName} إلى سلة التسوق`);
+                });
+            });
+            
+            // فلترة المنتجات
+            const filterOptions = document.querySelectorAll('.filter-option');
+            filterOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // إزالة النشاط من جميع الخيارات في المجموعة
+                    const parentGroup = this.parentElement;
+                    const groupOptions = parentGroup.querySelectorAll('.filter-option');
+                    groupOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // إضافة النشاط للخيار المحدد
+                    this.classList.add('active');
+                    
+                    // تطبيق الفلترة
+                    filterProducts();
+                });
+            });
+            
+            // فلترة المنتجات حسب التصنيف
+            function filterProducts() {
+                const activeCategory = document.querySelector('.filter-options .filter-option.active')?.dataset.category;
+                const products = document.querySelectorAll('.product-card');
+                
+                products.forEach(product => {
+                    if (!activeCategory || activeCategory === 'الكل' || product.dataset.category === activeCategory) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            }
+            
+            // فلترة المنتجات عند النقر على بطاقات التصنيف
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // تحديث الفلاتر النشطة
+                    const categoryOptions = document.querySelectorAll('.filter-option[data-category]');
+                    categoryOptions.forEach(option => {
+                        option.classList.remove('active');
+                        if (option.dataset.category === category) {
+                            option.classList.add('active');
+                        }
+                    });
+                    
+                    // تطبيق الفلترة
+                    filterProducts();
+                    
+                    // التمرير إلى قسم المنتجات
+                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+            
+            // تبديل وضع الضوء/الظلام
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            
+            // التحقق من التفضيل المحفوظ
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+            
+            themeToggle.addEventListener('click', function() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+            
+            function updateThemeIcon(theme) {
+                if (theme === 'dark') {
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                } else {
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                }
+            }
+            
+            // تأثيرات Fade-in للبطاقات
+            const cards = document.querySelectorAll('.product-card, .category-card, .offer-card');
+            
+            const fadeInOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const fadeInOnScroll = new IntersectionObserver(function(entries, fadeInOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    
+                    entry.target.classList.add('fade-in');
+                    fadeInOnScroll.unobserve(entry.target);
+                });
+            }, fadeInOptions);
+            
+            cards.forEach(card => {
+                fadeInOnScroll.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
