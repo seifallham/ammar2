@@ -14,7 +14,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
-        
+
         :root {
             --primary: #3498db;
             --secondary: #2c3e50;
@@ -23,7 +23,7 @@
             --dark: #2c3e50;
             --gray: #95a5a6;
             --success: #2ecc71;
-            
+
             /* ألوان الوضع الفاتح */
             --bg-color: #f9f9f9;
             --text-color: #333;
@@ -33,7 +33,7 @@
             --border-color: #ddd;
             --shadow: rgba(0,0,0,0.1);
         }
-        
+
         /* متغيرات الوضع الداكن */
         [data-theme="dark"] {
             --bg-color: #121212;
@@ -46,21 +46,21 @@
             --light: #2a2a2a;
             --gray: #777;
         }
-        
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
+            padding-left: 80px; /* Space for sidebar on desktop */
         }
 
-        
         .container {
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
-        
+
         /* الهيدر */
         header {
             background-color: var(--header-bg);
@@ -68,36 +68,37 @@
             position: sticky;
             top: 0;
             z-index: 1000;
+            right: 0;
+            left: 80px; /* Offset for sidebar */
         }
-        
+
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
         }
-        
+
         .logo {
             display: flex;
             align-items: center;
-            
         }
-        
+
         .logo img {
             height: 50px;
             margin-left: 10px;
         }
-        
+
         .logo h1 {
             color: var(--secondary);
             font-size: 1.8rem;
         }
-        
+
         .search-bar {
             display: flex;
             width: 40%;
         }
-        
+
         .search-bar input {
             width: 100%;
             padding: 10px 15px;
@@ -107,7 +108,7 @@
             background-color: var(--card-bg);
             color: var(--text-color);
         }
-        
+
         .search-bar button {
             background: var(--primary);
             color: white;
@@ -116,65 +117,83 @@
             border-radius: 4px 4px 4px 4px;
             cursor: pointer;
         }
-        
+
         .user-actions {
             display: flex;
             gap: 30px;
             align-items: center;
         }
-        
+
         .user-actions a {
             color: var(--text-color);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 5px;
-        }
-        
-        /* زر تبديل الوضع */
-        .theme-toggle {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            cursor: pointer;
             font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            transition: background-color 0.3s;
         }
-        
-        .theme-toggle:hover {
-            background-color: var(--light);
-        }
-        
-        nav {
+
+        /* Side Navigation Bar */
+        .side-nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 80px;
+            height: 100vh;
             background-color: var(--nav-bg);
-            padding: 10px 0;
-        }
-        
-        nav ul {
             display: flex;
-            list-style: none;
-            justify-content: space-around;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            z-index: 1001;
+            box-shadow: 2px 0 10px var(--shadow);
         }
-        
-        nav a {
+
+        .side-nav-item {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
             color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            position: relative;
+        }
+
+        .side-nav-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .side-nav-item.active {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .side-nav-item i {
+            font-size: 1.5rem;
+        }
+
+        .side-nav-item .nav-tooltip {
+            position: absolute;
+            left: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--dark);
+            color: white;
+            padding: 5px 10px;
             border-radius: 4px;
-            transition: background 0.3s;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            pointer-events: none;
+            font-size: 0.9rem;
         }
-        
-        nav a:hover {
-            background-color: rgba(255,255,255,0.1);
+
+        .side-nav-item:hover .nav-tooltip {
+            opacity: 1;
+            visibility: visible;
         }
-        
+
         /* زر القائمة للموبايل */
         .menu-toggle {
             display: none;
@@ -184,7 +203,7 @@
             font-size: 1.5rem;
             cursor: pointer;
         }
-        
+
         /* قسم الهيرو */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80');
@@ -194,25 +213,25 @@
             padding: 100px 0;
             text-align: center;
         }
-        
+
         .hero h1 {
             font-size: 3rem;
             margin-bottom: 20px;
         }
-        
+
         .hero p {
             font-size: 1.2rem;
             max-width: 700px;
             margin: 0 auto 30px;
         }
-        
+
         .hero-buttons {
             display: flex;
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
         }
-        
+
         .btn {
             display: inline-block;
             background-color: var(--accent);
@@ -225,34 +244,34 @@
             border: none;
             cursor: pointer;
         }
-        
+
         .btn:hover {
             background-color: #c0392b;
         }
-        
+
         .btn-outline {
             background-color: transparent;
             border: 2px solid white;
             color: white;
         }
-        
+
         .btn-outline:hover {
             background-color: white;
             color: var(--dark);
         }
-        
+
         /* قسم الفئات */
         .categories {
             padding: 60px 0;
         }
-        
+
         .section-title {
             text-align: center;
             margin-bottom: 40px;
             color: var(--text-color);
             position: relative;
         }
-        
+
         .section-title::after {
             content: '';
             display: block;
@@ -261,13 +280,13 @@
             background-color: var(--primary);
             margin: 10px auto;
         }
-        
+
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 30px;
         }
-        
+
         .category-card {
             background-color: var(--card-bg);
             border-radius: 8px;
@@ -277,54 +296,54 @@
             text-align: center;
             border: 1px solid var(--border-color);
         }
-        
+
         .category-card:hover {
             transform: translateY(-10px);
         }
-        
+
         .category-img {
             height: 200px;
             overflow: hidden;
         }
-        
+
         .category-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.5s;
         }
-        
+
         .category-card:hover .category-img img {
             transform: scale(1.1);
         }
-        
+
         .category-info {
             padding: 20px;
         }
-        
+
         .category-info h3 {
             margin-bottom: 10px;
             color: var(--text-color);
         }
-        
+
         .category-info p {
             color: var(--gray);
             margin-bottom: 15px;
         }
-        
+
         /* قسم المنتجات */
         .products-section {
             padding: 60px 0;
             background-color: var(--light);
         }
-        
+
         .products-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 30px;
         }
-        
+
         .view-all {
             color: var(--primary);
             text-decoration: none;
@@ -333,13 +352,13 @@
             align-items: center;
             gap: 5px;
         }
-        
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 30px;
         }
-        
+
         .product-card {
             background-color: var(--card-bg);
             border-radius: 8px;
@@ -349,11 +368,11 @@
             position: relative;
             border: 1px solid var(--border-color);
         }
-        
+
         .product-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .product-badge {
             position: absolute;
             top: 10px;
@@ -366,7 +385,7 @@
             font-weight: bold;
             z-index: 1;
         }
-        
+
         .product-img {
             height: 200px;
             overflow: hidden;
@@ -375,50 +394,50 @@
             justify-content: center;
             background-color: var(--light);
         }
-        
+
         .product-img img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
             transition: transform 0.5s;
         }
-        
+
         .product-card:hover .product-img img {
             transform: scale(1.05);
         }
-        
+
         .product-info {
             padding: 15px;
         }
-        
+
         .product-info h3 {
             margin-bottom: 10px;
             color: var(--text-color);
             height: 48px;
             overflow: hidden;
         }
-        
+
         .product-price {
             color: var(--accent);
             font-weight: bold;
             font-size: 1.2rem;
             margin-bottom: 10px;
         }
-        
+
         .product-old-price {
             color: var(--gray);
             text-decoration: line-through;
             font-size: 0.9rem;
             margin-right: 10px;
         }
-        
+
         .product-specs {
             list-style: none;
             margin-bottom: 15px;
             border-top: 1px solid var(--border-color);
             padding-top: 10px;
         }
-        
+
         .product-specs li {
             margin-bottom: 5px;
             font-size: 0.9rem;
@@ -426,17 +445,17 @@
             display: flex;
             align-items: center;
         }
-        
+
         .product-specs li i {
             margin-left: 5px;
             color: var(--primary);
         }
-        
+
         .product-actions {
             display: flex;
             gap: 10px;
         }
-        
+
         .add-to-cart {
             background-color: var(--primary);
             color: white;
@@ -447,11 +466,11 @@
             flex: 1;
             transition: background 0.3s;
         }
-        
+
         .add-to-cart:hover {
             background-color: #2980b9;
         }
-        
+
         .favorite-btn {
             background-color: transparent;
             border: 1px solid var(--gray);
@@ -461,23 +480,23 @@
             cursor: pointer;
             transition: all 0.3s;
         }
-        
+
         .favorite-btn:hover {
             color: var(--accent);
             border-color: var(--accent);
         }
-        
+
         /* قسم المميزات */
         .features {
             padding: 60px 0;
         }
-        
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 30px;
         }
-        
+
         .feature-card {
             background-color: var(--card-bg);
             border-radius: 8px;
@@ -487,32 +506,32 @@
             transition: transform 0.3s;
             border: 1px solid var(--border-color);
         }
-        
+
         .feature-card:hover {
             transform: translateY(-5px);
         }
-        
+
         .feature-icon {
             font-size: 2.5rem;
             color: var(--primary);
             margin-bottom: 20px;
         }
-        
+
         .feature-card h3 {
             margin-bottom: 15px;
             color: var(--text-color);
         }
-        
+
         .feature-card p {
             color: var(--gray);
         }
-        
+
         /* قسم العروض */
         .offers {
             padding: 60px 0;
             background-color: var(--light);
         }
-        
+
         .offer-banner {
             background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80');
             background-size: cover;
@@ -522,12 +541,12 @@
             border-radius: 8px;
             text-align: center;
         }
-        
+
         .offer-banner h2 {
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
-        
+
         .offer-banner p {
             font-size: 1.2rem;
             margin-bottom: 30px;
@@ -535,31 +554,31 @@
             margin-left: auto;
             margin-right: auto;
         }
-        
+
         .countdown {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin-bottom: 30px;
         }
-        
+
         .countdown-item {
             background-color: rgba(255,255,255,0.2);
             padding: 15px;
             border-radius: 8px;
             min-width: 80px;
         }
-        
+
         .countdown-number {
             font-size: 2rem;
             font-weight: bold;
             display: block;
         }
-        
+
         .countdown-label {
             font-size: 0.9rem;
         }
-        
+
         /* الترقيم */
         .pagination {
             display: flex;
@@ -567,7 +586,7 @@
             margin-top: 40px;
             gap: 5px;
         }
-        
+
         .pagination a {
             display: inline-flex;
             align-items: center;
@@ -581,39 +600,36 @@
             border: 1px solid var(--border-color);
             transition: all 0.3s;
         }
-        
+
         .pagination a.active,
         .pagination a:hover {
             background-color: var(--primary);
             color: white;
             border-color: var(--primary);
-        
+
         }
-        nav a:hover, nav a.active {
-            background-color: rgba(255,255,255,0.1);
-        }
-        
+
         /* الفوتر */
         footer {
             background-color: var(--nav-bg);
             color: white;
             padding: 50px 0 20px;
         }
-        
+
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 30px;
             margin-bottom: 30px;
         }
-        
+
         .footer-column h3 {
             margin-bottom: 20px;
             font-size: 1.2rem;
             position: relative;
             padding-bottom: 10px;
         }
-        
+
         .footer-column h3::after {
             content: '';
             position: absolute;
@@ -623,31 +639,31 @@
             height: 2px;
             background-color: var(--primary);
         }
-        
+
         .footer-column ul {
             list-style: none;
         }
-        
+
         .footer-column ul li {
             margin-bottom: 10px;
         }
-        
+
         .footer-column a {
             color: #ddd;
             text-decoration: none;
             transition: color 0.3s;
         }
-        
+
         .footer-column a:hover {
             color: var(--primary);
         }
-        
+
         .social-icons {
             display: flex;
             gap: 15px;
             margin-top: 15px;
         }
-        
+
         .social-icons a {
             display: inline-flex;
             align-items: center;
@@ -658,11 +674,11 @@
             border-radius: 50%;
             transition: background 0.3s;
         }
-        
+
         .social-icons a:hover {
             background-color: var(--primary);
         }
-        
+
         .copyright {
             text-align: center;
             padding-top: 20px;
@@ -670,182 +686,173 @@
             color: #aaa;
             font-size: 0.9rem;
         }
-        
+
         /* التجاوبية */
         @media (max-width: 1200px) {
             .container {
                 width: 95%;
             }
         }
-        
+
         @media (max-width: 992px) {
             .features-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
-            
+
             .search-bar {
                 width: 50%;
             }
         }
-        
+
         @media (max-width: 768px) {
+            body {
+                padding-left: 0;
+            }
+            
+            header {
+                left: 0;
+            }
+            
+            .side-nav {
+                right: -80px;
+                transition: right 0.3s;
+            }
+            
+            .side-nav.active {
+                right: 0;
+            }
+            
             .header-top {
                 flex-direction: row;
                 flex-wrap: wrap;
                 gap: 15px;
             }
-            
+
             .logo {
                 order: 1;
             }
-            
+
             .user-actions {
                 order: 2;
             }
-            
+
             .search-bar {
                 width: 100%;
                 order: 3;
             }
-            
-            nav ul {
-                flex-wrap: wrap;
-                gap: 10px;
-            }
-            
+
             .hero h1 {
                 font-size: 2.2rem;
             }
-            
+
             .hero p {
                 font-size: 1rem;
             }
-            
+
             .products-header {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 15px;
             }
-            
+
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
                 gap: 20px;
             }
-            
+
             .menu-toggle {
                 display: block;
                 order: 0;
             }
-            
-            nav {
-                display: none;
-            }
-            
-            nav.active {
-                display: block;
-            }
-            
-            nav ul {
-                flex-direction: column;
-                gap: 0;
-            }
-            
-            nav a {
-                display: block;
-                padding: 12px 15px;
-                border-bottom: 1px solid rgba(255,255,255,0.1);
-            }
 
-           
-            
             .categories-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             }
-            
+
             .countdown {
                 flex-wrap: wrap;
             }
-            
+
             .user-actions a span {
                 display: none;
             }
         }
-        
+
         @media (max-width: 576px) {
             .hero {
                 padding: 60px 0;
             }
-            
+
             .hero h1 {
                 font-size: 1.8rem;
             }
-            
+
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .products-grid {
                 grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
                 gap: 15px;
             }
-            
+
             .product-img {
                 height: 150px;
             }
-            
+
             .product-info h3 {
                 font-size: 1rem;
                 height: auto;
             }
-            
+
             .product-actions {
                 flex-direction: column;
             }
-            
+
             .categories-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .features-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .offer-banner {
                 padding: 40px 20px;
             }
-            
+
             .offer-banner h2 {
                 font-size: 1.8rem;
             }
-            
+
             .countdown-item {
                 min-width: 70px;
                 padding: 10px;
             }
-            
+
             .countdown-number {
                 font-size: 1.5rem;
             }
         }
-        
+
         @media (max-width: 400px) {
             .logo h1 {
                 font-size: 1.4rem;
             }
-            
+
             .user-actions {
                 gap: 10px;
             }
-            
+
             .hero h1 {
                 font-size: 1.6rem;
             }
-            
+
             .hero p {
                 font-size: 0.9rem;
             }
-            
+
             .btn {
                 padding: 10px 20px;
                 font-size: 0.9rem;
@@ -854,6 +861,34 @@
     </style>
 </head>
 <body>
+    <!-- Side Navigation Bar -->
+    <aside class="side-nav" id="sideNav">
+        <div class="side-nav-item" id="themeToggle">
+            <i class="fas fa-moon"></i>
+            <span class="nav-tooltip">تبديل الوضع</span>
+        </div>
+        <div class="side-nav-item active">
+            <i class="fas fa-home"></i>
+            <span class="nav-tooltip">الرئيسية</span>
+        </div>
+        <div class="side-nav-item">
+            <i class="fas fa-mobile-alt"></i>
+            <span class="nav-tooltip">الهواتف</span>
+        </div>
+        <div class="side-nav-item">
+            <i class="fas fa-laptop"></i>
+            <span class="nav-tooltip">اللابتوبات</span>
+        </div>
+        <div class="side-nav-item">
+            <i class="fas fa-tag"></i>
+            <span class="nav-tooltip">العروض</span>
+        </div>
+        <div class="side-nav-item">
+            <i class="fas fa-ellipsis-h"></i>
+            <span class="nav-tooltip">صفحات أخرى</span>
+        </div>
+    </aside>
+
     <!-- الهيدر -->
     <header>
         <div class="container">
@@ -861,7 +896,7 @@
                 <button class="menu-toggle" id="menuToggle">
                     <i class="fas fa-bars"></i>
                 </button>
-                
+
                 <div class="logo">
                     <img id="RR" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXpjYx0uM617EfReX5Ee7ndDETaUnJunbCqA&s" alt="شعار عمار موبايل">
                     <h1>عمار موبايل</h1>
@@ -871,33 +906,14 @@
                     <input type="text" placeholder="ابحث عن المنتج الذي تريده...">
                     <button><i class="fas fa-search"></i></button>
                 </div>
-                
+
                 <div class="user-actions">
-                    <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <a href="login.html"><i class="fas fa-user"></i> <span>حسابي</span></a>
-                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> <span>السلة</span></a>
-                    <a href="favorites.html"><i class="fas fa-heart"></i> <span>المفضلة</span></a>
+                    <a href="login.html" title="حسابي"><i class="fas fa-user"></i></a>
+                    <a href="favorites.html" title="المفضلة"><i class="fas fa-heart"></i></a>
+                    <a href="cart.html" title="السلة"><i class="fas fa-shopping-cart"></i></a>
                 </div>
-                
             </div>
         </div>
-        
-        <nav id="mainNav">
-            <div class="container">
-                <ul>
-                    <li><a href="index.html" class="active">الرئيسية</a></li>
-                    <li><a href="pages/phones.html">الهواتف</a></li>
-                    <li><a href="pages/laptops.html">اللابتوبات</a></li>
-                    <li><a href="pages/desktops.html">أجهزة الكمبيوتر</a></li>
-                    <li><a href="pages/accessories.html">الإكسسوارات</a></li>
-                    <li><a href="pages/cases.html">الكفرات</a></li>
-                    <li><a href="pages/offers.html">العروض</a></li>
-                    <li><a href="pages/contact.html">اتصل بنا</a></li>
-                </ul>
-            </div>
-        </nav>
     </header>
 
     <!-- قسم الهيرو -->
@@ -916,7 +932,7 @@
     <section class="categories">
         <div class="container">
             <h2 class="section-title">فئات المنتجات</h2>
-            
+
             <div class="categories-grid">
                 <div class="category-card">
                     <div class="category-img">
@@ -928,7 +944,7 @@
                         <a href="/pages/phones.html" class="btn">استكشاف</a>
                     </div>
                 </div>
-                
+
                 <div class="category-card">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="اللابتوبات">
@@ -939,7 +955,7 @@
                         <a href="pages/laptops.html" class="btn">استكشاف</a>
                     </div>
                 </div>
-                
+
                 <div class="category-card">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="أجهزة الكمبيوتر">
@@ -950,7 +966,7 @@
                         <a href="pages/computers.html" class="btn">استكشاف</a>
                     </div>
                 </div>
-                
+
                 <div class="category-card">
                     <div class="category-img">
                         <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80" alt="الإكسسوارات">
@@ -972,9 +988,9 @@
                 <h2 class="section-title">الهواتف الذكية</h2>
                 <a href="pages/phones.html" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
             </div>
-            
+
             <p class="page-subtitle" style="text-align: center; margin-bottom: 30px;">اكتشف أحدث الهواتف الذكية من أشهر العلامات التجارية مثل آبل، سامسونج، هواوي وشاومي مع أحدث التقنيات والكاميرات المتطورة.</p>
-            
+
             <div class="products-grid">
                 <!-- هاتف 1 -->
                 <div class="product-card">
@@ -1000,7 +1016,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- هاتف 2 -->
                 <div class="product-card">
                     <div class="product-badge">عرض خاص</div>
@@ -1025,7 +1041,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- هاتف 3 -->
                 <div class="product-card">
                     <div class="product-img">
@@ -1057,9 +1073,9 @@
                 <h2 class="section-title">اللابتوبات</h2>
                 <a href="pages/laptops.html" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
             </div>
-            
+
             <p class="page-subtitle" style="text-align: center; margin-bottom: 30px;">لابتوبات متطورة تلبي جميع احتياجاتك سواء للعمل، الدراسة، الألعاب أو المونتاج. اختر من بين مجموعة واسعة من الماركات العالمية.</p>
-            
+
             <div class="products-grid">
                 <!-- لابتوب 1 -->
                 <div class="product-card">
@@ -1082,7 +1098,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- لابتوب 2 -->
                 <div class="product-card">
                     <div class="product-badge">وفر 15%</div>
@@ -1107,7 +1123,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- لابتوب 3 -->
                 <div class="product-card">
                     <div class="product-img">
@@ -1139,9 +1155,9 @@
                 <h2 class="section-title">أجهزة الكمبيوتر</h2>
                 <a href="pages/computers.html" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
             </div>
-            
+
             <p class="page-subtitle" style="text-align: center; margin-bottom: 30px;">اكتشف مجموعتنا الواسعة من أجهزة الكمبيوتر المكتبية والمحمولة والمكونات بمواصفات وأسعار تنافسية. مثالية للألعاب، العمل والمونتاج.</p>
-            
+
             <div class="products-grid">
                 <!-- جهاز 1 -->
                 <div class="product-card">
@@ -1167,7 +1183,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- جهاز 2 -->
                 <div class="product-card">
                     <div class="product-badge">عرض خاص</div>
@@ -1192,7 +1208,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- جهاز 3 -->
                 <div class="product-card">
                     <div class="product-img">
@@ -1224,9 +1240,9 @@
                 <h2 class="section-title">الإكسسوارات</h2>
                 <a href="pages/accessories.html" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
             </div>
-            
+
             <p class="page-subtitle" style="text-align: center; margin-bottom: 30px;">اكتشف تشكيلتنا المتنوعة من الإكسسوارات التي تضفي لمسة شخصية على أجهزتك وتوفر حماية إضافية لها.</p>
-            
+
             <div class="products-grid">
                 <!-- إكسسوار 1 -->
                 <div class="product-card">
@@ -1249,7 +1265,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- إكسسوار 2 -->
                 <div class="product-card">
                     <div class="product-badge">وفر 20%</div>
@@ -1274,7 +1290,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- إكسسوار 3 -->
                 <div class="product-card">
                     <div class="product-img">
@@ -1303,7 +1319,7 @@
     <section class="features">
         <div class="container">
             <h2 class="section-title">لماذا تختار متجر عمار موبايل؟</h2>
-            
+
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -1312,7 +1328,7 @@
                     <h3>شحن سريع</h3>
                     <p>شحن مجاني وسريع لجميع أنحاء المملكة خلال 2-3 أيام عمل</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
@@ -1320,7 +1336,7 @@
                     <h3>ضمان الجودة</h3>
                     <p>جميع منتجاتنا أصلية ومدعومة بضمان من الشركة المصنعة</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-headset"></i>
@@ -1328,7 +1344,7 @@
                     <h3>دعم فني</h3>
                     <p>فريق دعم فني متاح على مدار الساعة لمساعدتك في أي استفسار</p>
                 </div>
-                
+
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-undo-alt"></i>
@@ -1346,7 +1362,7 @@
             <div class="offer-banner">
                 <h2>عروض خاصة لفترة محدودة</h2>
                 <p>احصل على خصم يصل إلى 30% على مجموعة مختارة من الهواتف واللابتوبات. العرض ساري حتى نهاية الشهر</p>
-                
+
                 <div class="countdown">
                     <div class="countdown-item">
                         <span class="countdown-number" id="days">15</span>
@@ -1385,7 +1401,7 @@
                         <a href="#"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>روابط سريعة</h3>
                     <ul>
@@ -1396,7 +1412,7 @@
                         <li><a href="#">اتصل بنا</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>الفئات</h3>
                     <ul>
@@ -1407,7 +1423,7 @@
                         <li><a href="#">الكفرات</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-column">
                     <h3>معلومات الاتصال</h3>
                     <ul>
@@ -1417,7 +1433,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="copyright">
                 <p>جميع الحقوق محفوظة &copy; 2025 متجر عمار موبايل</p>
             </div>
@@ -1429,12 +1445,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             // زر القائمة للموبايل
             const menuToggle = document.getElementById('menuToggle');
-            const mainNav = document.getElementById('mainNav');
-            
+            const sideNav = document.getElementById('sideNav');
+
             menuToggle.addEventListener('click', function() {
-                mainNav.classList.toggle('active');
+                sideNav.classList.toggle('active');
             });
-            
+
             // إضافة تأثير عند الضغط على أزرار إضافة إلى السلة
             const addToCartButtons = document.querySelectorAll('.add-to-cart');
             addToCartButtons.forEach(button => {
@@ -1443,7 +1459,7 @@
                     alert(`تم إضافة ${productName} إلى سلة التسوق`);
                 });
             });
-            
+
             // إضافة تأثير عند الضغط على أزرار المفضلة
             const favoriteButtons = document.querySelectorAll('.favorite-btn');
             favoriteButtons.forEach(button => {
@@ -1462,50 +1478,50 @@
                     }
                 });
             });
-            
+
             // عداد تنازلي للعروض
             function updateCountdown() {
                 const now = new Date();
                 const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
                 endOfMonth.setHours(23, 59, 59, 999);
-                
+
                 const timeLeft = endOfMonth - now;
-                
+
                 const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
+
                 document.getElementById('days').textContent = days;
                 document.getElementById('hours').textContent = hours;
                 document.getElementById('minutes').textContent = minutes;
                 document.getElementById('seconds').textContent = seconds;
             }
-            
+
             setInterval(updateCountdown, 1000);
             updateCountdown();
-            
+
             // نظام الوضع الداكن
             const themeToggle = document.getElementById('themeToggle');
             const themeIcon = themeToggle.querySelector('i');
-            
+
             // التحقق من التفضيل المحفوظ
             const savedTheme = localStorage.getItem('theme') || 'light';
             document.documentElement.setAttribute('data-theme', savedTheme);
-            
+
             if (savedTheme === 'dark') {
                 themeIcon.classList.remove('fa-moon');
                 themeIcon.classList.add('fa-sun');
             }
-            
+
             // تبديل الوضع
             themeToggle.addEventListener('click', function() {
                 const currentTheme = document.documentElement.getAttribute('data-theme');
                 const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-                
+
                 document.documentElement.setAttribute('data-theme', newTheme);
                 localStorage.setItem('theme', newTheme);
-                
+
                 if (newTheme === 'dark') {
                     themeIcon.classList.remove('fa-moon');
                     themeIcon.classList.add('fa-sun');
@@ -1514,24 +1530,49 @@
                     themeIcon.classList.add('fa-moon');
                 }
             });
-            
+
             // إغلاق القائمة عند النقر خارجها
             document.addEventListener('click', function(event) {
-                if (!event.target.closest('nav') && !event.target.closest('.menu-toggle')) {
-                    mainNav.classList.remove('active');
+                if (!event.target.closest('.side-nav') && !event.target.closest('.menu-toggle')) {
+                    sideNav.classList.remove('active');
                 }
             });
+
+            // التنقل بين الصفحات عند النقر على أيقونات القائمة الجانبية
+            const sideNavItems = document.querySelectorAll('.side-nav-item');
+            sideNavItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    if (this === themeToggle) return; // استثناء زر تبديل الوضع
+                    
+                    // إزالة النشاط من جميع العناصر
+                    sideNavItems.forEach(el => el.classList.remove('active'));
+                    
+                    // إضافة النشاط للعنصر المحدد
+                    this.classList.add('active');
+                    
+                    // التنقل إلى الصفحات المناسبة (يمكن تنفيذ هذا الجزء حسب الحاجة)
+                    const tooltip = this.querySelector('.nav-tooltip').textContent;
+                    switch(tooltip) {
+                        case 'الرئيسية':
+                            window.location.href = 'index.html';
+                            break;
+                        case 'الهواتف':
+                            window.location.href = 'pages/phones.html';
+                            break;
+                        case 'اللابتوبات':
+                            window.location.href = 'pages/laptops.html';
+                            break;
+                        case 'العروض':
+                            window.location.href = 'pages/offers.html';
+                            break;
+                        case 'صفحات أخرى':
+                            // يمكن فتح قائمة منسدلة هنا أو التنقل إلى صفحة رئيسية للصفحات الأخرى
+                            window.location.href = 'pages/other.html';
+                            break;
+                    }
+                });
+            });
         });
-
-
-
-
-
-
-
-    
-
-
    </script>
 </body>
 </html>
